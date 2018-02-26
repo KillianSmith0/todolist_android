@@ -9,9 +9,12 @@ public class ToDoItem {
     private int id;
     private String item;
 
+    private Boolean isComplete;
+
     ToDoItem(int id, String item){
         this.id = id;
         this.item = item;
+        isComplete = false;
     }
 
     public int getId() {
@@ -20,6 +23,14 @@ public class ToDoItem {
 
     public String getItem() {
         return item;
+    }
+
+    public Boolean isComplete() {
+        return isComplete;
+    }
+
+    public void isComplete(Boolean complete) {
+        isComplete = complete;
     }
 
     @Override
@@ -40,11 +51,6 @@ public class ToDoItem {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "<ID,"+getId()+" '"+getItem()+"'>";
-    }
-
     public static Comparator<ToDoItem> itemComparator = new Comparator<ToDoItem>() {
         @Override
         public int compare(ToDoItem toDoItem, ToDoItem t1) {
@@ -58,5 +64,10 @@ public class ToDoItem {
             return  toDoItem.getId() - t1.getId();
         }
     };
+
+    @Override
+    public String toString() {
+        return "ToDoItem{id="+getId()+", title='"+getItem()+"', isComplete="+isComplete()+"}";
+    }
 
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,8 +42,7 @@ class ToDoAdapter extends RecyclerView.Adapter {
         return data;
     }
 
-
-    public void addItem(ToDoItem item){
+    public void addItem(ToDoItem item) {
         data.add(item);
         notifyDataSetChanged();
 //        notifyItemInserted(data.size()-1);
@@ -63,11 +63,11 @@ class ToDoAdapter extends RecyclerView.Adapter {
 
     @Override   // Invoked by the layout manager
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.i("Adapter", "ViewHolder created");
 
         // Create a new view. from the type of view that is inserted in the list.
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(viewType, parent, false);
-        Log.i("Adapter", "ViewHolder created");
         return new MyViewHolder(view);    // Deals with the view as a whole. i.e. the Layout.
     }
 
@@ -107,19 +107,36 @@ class ToDoAdapter extends RecyclerView.Adapter {
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView idView;
         private TextView itemView;
+        private ToggleButton isCompleteToggle;
         private Button deleteButton;
 
         public MyViewHolder(View view) {
             super(view);
             this.idView = (TextView) view.findViewById(R.id.id_text_view);
             this.itemView = (TextView) view.findViewById(R.id.item_text_view);
+            this.isCompleteToggle = (ToggleButton) view.findViewById(R.id.is_complete_toggle);
             this.deleteButton = (Button) view.findViewById(R.id.delete_button);
         }
 
         // Need to create a method that binds the data from the dataset to a RecyclerView's cell
-        public void bindData(ToDoItem itemModel) {
+        public void bindData(final ToDoItem itemModel) {
             idView.setText(Integer.toHexString(itemModel.getId()));
             itemView.setText(itemModel.getItem());
+
+            isCompleteToggle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String itemString = itemView.getText().toString();
+
+                    itemModel.isComplete(!itemModel.isComplete());
+                    if (itemModel.isComplete()) {
+                        Toast.makeText(view.getContext(), "Item complete:"+ itemString, Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(view.getContext(), "Item incomplete:"+ itemString, Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
         }
     }
 }

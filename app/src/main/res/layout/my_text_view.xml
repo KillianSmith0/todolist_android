@@ -24,11 +24,18 @@
         android:textSize="16dp"
         android:textStyle="bold" />
 
+    <ToggleButton
+        android:id="@+id/is_complete_toggle"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:textOff="X"
+        android:textOn=":)" />
+
     <Button
         android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="removeItem"
         android:text="Delete"
         android:textAllCaps="false" />
 

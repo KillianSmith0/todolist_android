@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private EditText enterString;
@@ -44,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
         sortItemButton = findViewById(R.id.sort_item_button);
         sortIdButton = findViewById(R.id.sort_id_button);
         logButton = findViewById(R.id.log_button);
+
+        enterString.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                enterItemClicked();
+                return true;
+            }
+        });
 
         enterItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
