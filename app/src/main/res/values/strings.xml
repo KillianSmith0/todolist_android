@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SortListApp</string>
+    <string name="enter_items_tv">Enter items:</string>
+    <string name="enter_item">Enter Item</string>
+    <string name="hint_template_text_view">Template for a todo item</string>
+    <string name="sort_list">Sort List</string>
+    <string name="hint_item_id">Item ID</string>
+    <string name="sort_items">Sort Items</string>
+    <string name="sort_by_id">Sort by ID</string>
+    <string name="log_list">Log List</string>
+</resources>
