@@ -5,11 +5,11 @@ import java.util.Comparator;
  * Created by ksmith on 22/02/2018.
  */
 
-public class ListItem{
+public class ToDoItem {
     private int id;
     private String item;
 
-    ListItem(int id, String item){
+    ToDoItem(int id, String item){
         this.id = id;
         this.item = item;
     }
@@ -27,10 +27,10 @@ public class ListItem{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ListItem listItem = (ListItem) o;
+        ToDoItem toDoItem = (ToDoItem) o;
 
-        if (id != listItem.id) return false;
-        return item != null ? item.equals(listItem.item) : listItem.item == null;
+        if (id != toDoItem.id) return false;
+        return item != null ? item.equals(toDoItem.item) : toDoItem.item == null;
     }
 
     @Override
@@ -42,20 +42,20 @@ public class ListItem{
 
     @Override
     public String toString() {
-        return "ID-"+getId()+": '"+getItem()+"'";
+        return "<ID,"+getId()+" '"+getItem()+"'>";
     }
 
-    public static Comparator<ListItem> itemComparator = new Comparator<ListItem>() {
+    public static Comparator<ToDoItem> itemComparator = new Comparator<ToDoItem>() {
         @Override
-        public int compare(ListItem listItem, ListItem t1) {
-            return listItem.getItem().compareTo(t1.getItem());
+        public int compare(ToDoItem toDoItem, ToDoItem t1) {
+            return toDoItem.getItem().compareTo(t1.getItem());
         }
     };
 
-    public static Comparator<ListItem> idComparator = new Comparator<ListItem>() {
+    public static Comparator<ToDoItem> idComparator = new Comparator<ToDoItem>() {
         @Override
-        public int compare(ListItem listItem, ListItem t1) {
-            return  listItem.getId() - t1.getId();
+        public int compare(ToDoItem toDoItem, ToDoItem t1) {
+            return  toDoItem.getId() - t1.getId();
         }
     };
 

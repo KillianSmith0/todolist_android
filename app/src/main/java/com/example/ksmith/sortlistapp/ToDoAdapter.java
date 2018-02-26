@@ -1,6 +1,5 @@
 package com.example.ksmith.sortlistapp;
 
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,16 +33,16 @@ import java.util.Collections;
  * with new data items when the original item is no longer visible.
  */
 
-class MyAdapter extends RecyclerView.Adapter {
+class ToDoAdapter extends RecyclerView.Adapter {
 
-    private ArrayList<ListItem> data = new ArrayList<>();
+    private ArrayList<ToDoItem> data = new ArrayList<ToDoItem>();
 
-    public ArrayList<ListItem> getData() {
+    public ArrayList<ToDoItem> getData() {
         return data;
     }
 
 
-    public void addItem(ListItem item){
+    public void addItem(ToDoItem item){
         data.add(item);
         notifyDataSetChanged();
 //        notifyItemInserted(data.size()-1);
@@ -52,13 +51,13 @@ class MyAdapter extends RecyclerView.Adapter {
     public void sortById() {
         Log.i("Sorting list", "By item ID");
 
-        Collections.sort(data, ListItem.idComparator);
+        Collections.sort(data, ToDoItem.idComparator);
         notifyDataSetChanged();
     }
 
     public void sortByItem() {
         Log.i("Sorting list", "By Item String");
-        Collections.sort(data, ListItem.itemComparator);
+        Collections.sort(data, ToDoItem.itemComparator);
         notifyDataSetChanged();
     }
 
@@ -118,7 +117,7 @@ class MyAdapter extends RecyclerView.Adapter {
         }
 
         // Need to create a method that binds the data from the dataset to a RecyclerView's cell
-        public void bindData(ListItem itemModel) {
+        public void bindData(ToDoItem itemModel) {
             idView.setText(Integer.toHexString(itemModel.getId()));
             itemView.setText(itemModel.getItem());
         }

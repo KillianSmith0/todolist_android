@@ -8,26 +8,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     private EditText enterString;
 
-    private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView recyclerView;
+    private ToDoAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private Button enterItemButton;
     private Button sortItemButton;
     private Button sortIdButton;
     private Button logButton;
 
-    static int id = 0;
-
+    private static int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +29,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         enterString = (EditText) findViewById(R.id.enter_string_edit_text);
-        mAdapter = new MyAdapter();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true); // if you know the content won't change the size of the RV
+
+        adapter = new ToDoAdapter();
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true); // if you know the content won't change the size of the RV
 
         //use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
         enterItemButton = findViewById(R.id.add_item_button);
 
@@ -60,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
         sortItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAdapter.sortByItem();
+                adapter.sortByItem();
             }
         });
 
         sortIdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAdapter.sortById();
+                adapter.sortById();
             }
         });
 
@@ -83,17 +78,16 @@ public class MainActivity extends AppCompatActivity {
     public void enterItemClicked() {
         if (!enterString.getText().toString().isEmpty()) {
             String itemString = enterString.getText().toString();
-            ListItem item = new ListItem(id, itemString);
+            ToDoItem item = new ToDoItem(id, itemString);
 
-            mAdapter.addItem(item);
+            adapter.addItem(item);
             id++;
-
         }
         enterString.setText("");
     }
 
     public void logListClicked() {
-        Log.i("List", mAdapter.getData().toString());
+        Log.i("List", adapter.getData().toString());
     }
 
 
